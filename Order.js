@@ -4,14 +4,17 @@ class Order {
     this.type = type;
     this.size = size;
     this.amount = amount;
-    this.status = 'Pending';  // Default status is 'Pending'
-    this.createdAt = new Date();  // Timestamp of when the order was created
+    this.status = "Pending"; // Default status is 'Pending'
+    this.createdAt = new Date(); // Timestamp of when the order was created
   }
 
   // Method to validate the order
   validate() {
     if (!this.name || !this.type || !this.size) {
-      return { valid: false, message: 'Please provide name, type, and size for the order.' };
+      return {
+        valid: false,
+        message: "Please provide name, type, and size for the order.",
+      };
     }
 
     // Additional validation logic can go here (e.g., checking valid types or sizes)
@@ -20,7 +23,7 @@ class Order {
 
   // Method to update the status of an order
   updateStatus(newStatus) {
-    const validStatuses = ['Pending', 'Completed', 'Cancelled'];
+    const validStatuses = ["Pending", "Completed", "Cancelled"];
     if (validStatuses.includes(newStatus)) {
       this.status = newStatus;
       return true;
