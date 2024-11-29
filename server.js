@@ -26,7 +26,7 @@ app.post('/order', (req, res) => {
   const { name, type, size } = req.body;
 
   // Create a new order instance
-  const order = new Order(name, type, size);
+  const order = new Order(name, type, size, amount);
 
   // Validate the order
   const validation = order.validate();

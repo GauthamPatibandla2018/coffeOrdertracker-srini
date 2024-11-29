@@ -1,8 +1,9 @@
 class Order {
-  constructor(name, type, size) {
+  constructor(name, type, size, amount) {
     this.name = name;
     this.type = type;
     this.size = size;
+    this.amount = amount;
     this.status = 'Pending';  // Default status is 'Pending'
     this.createdAt = new Date();  // Timestamp of when the order was created
   }
@@ -34,6 +35,7 @@ class Order {
       type: this.type,
       size: this.size,
       status: this.status,
+      amount: this.amount,
       createdAt: this.createdAt
     };
   }
