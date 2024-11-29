@@ -5,6 +5,7 @@
 
 const express = require('express');
 const bodyParser = require('body-parser');
+const Order = require('./Order'); 
 
 const app = express();
 const port = 3000;
@@ -24,21 +25,25 @@ app.get('/orders', (req, res) => {
 app.post('/order', (req, res) => {
   const { name, type, size } = req.body;
 
-  if (!name || !type || !size) {
-    return res.status(400).json({ message: 'Please provide name, type, and size for the order' });
+  // Create a new order instance
+  const order = new Order(name, type, size);
+
+  // Validate the order
+  const validation = order.validate();
+  if (!validation.valid) {
+    return res.status(400).json({ message: validation.message });
   }
 
   // Add the new order to the orders array
-  const newOrder = { name, type, size };
-  coffeeOrders.push(newOrder);
+  coffeeOrders.push(order);
 
   res.status(201).json({
     message: 'Order placed successfully',
-    order: newOrder
+    order: order.toJSON()  // Return a plain object for easier response formatting
   });
 });
 
-// Route to delete an order by index (simple version)
+// Route to delete an order by index
 app.delete('/order/:index', (req, res) => {
   const index = parseInt(req.params.index, 10);
 
@@ -50,11 +55,11 @@ app.delete('/order/:index', (req, res) => {
   const removedOrder = coffeeOrders.splice(index, 1);
   res.json({
     message: 'Order removed successfully',
-    order: removedOrder[0]
+    order: removedOrder[0].toJSON()  
   });
 });
 
 // Start the server
 app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
+  
 });
