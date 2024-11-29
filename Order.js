@@ -39,7 +39,7 @@ class Order {
       size: this.size,
       status: this.status,
       amount: this.amount,
-      createdAt: this.createdAt
+      createdAt: this.createdAt,
     };
   }
 }
