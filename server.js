@@ -23,7 +23,7 @@ app.get("/orders", (req, res) => {
 
 // Route to place a new order
 app.post("/order", (req, res) => {
-  const { name, type, size } = req.body;
+  const { name, type, size, amount} = req.body;
 
   // Create a new order instance
   const order = new Order(name, type, size, amount);
